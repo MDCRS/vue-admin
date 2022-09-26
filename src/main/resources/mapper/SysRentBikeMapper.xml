@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysRentBikeMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.SysRentBike">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="rentId" column="rent_id" jdbcType="BIGINT"/>
+        <result property="hostId" column="host_id" jdbcType="BIGINT"/>
+        <result property="bikeId" column="bike_id" jdbcType="BIGINT"/>
+        <result property="rentDate" column="rent_date" jdbcType="TIMESTAMP"/>
+        <result property="returnDate" column="return_date" jdbcType="TIMESTAMP"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,rent_id,host_id,
+        bike_id,rent_date,return_date,
+        created,updated,is_deleted
+    </sql>
+    <select id="selectListByBikeIdAndHostId" resultType="com.example.entity.SysRentBike">
+        select *
+        from sys_rent_bike
+        where bike_id = #{bikeId}
+          and host_id = #{hostId}
+    </select>
+    <select id="selectListByBikeIdAndHostIdAndRentId" resultType="com.example.entity.SysRentBike">
+        select *
+        from sys_rent_bike
+        where bike_id = #{bikeId}
+          and host_id = #{hostId}
+          and rent_id = #{rentId}
+          and ISNULL(return_date)
+    </select>
+    <select id="getBrandCountByName" resultType="java.lang.Long"></select>
+</mapper>

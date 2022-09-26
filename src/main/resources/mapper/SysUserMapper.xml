@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysUserMapper">
+
+    <select id="getNavMenuIds" resultType="java.lang.Long">
+        select Distinct rm.menu_id
+        from sys_user_role ur
+                 left join sys_role_menu rm on ur.role_id = rm.role_id
+        where ur.user_id = #{userId}
+    </select>
+    <select id="listByMenuId" resultType="com.example.entity.SysUser">
+        SELECT DISTINCT su.*
+        FROM sys_user_role ur
+                 LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+                 LEFT JOIN sys_user su ON ur.user_id = su.id
+        WHERE rm.menu_id = #{menuId}
+    </select>
+    <select id="countByUserName" resultType="java.lang.Integer">
+        select count(*)
+        from sys_user
+        where username = #{username}
+    </select>
+    <select id="getByUsernameAndPhone" resultType="com.example.entity.SysUser">
+        select *
+        from sys_user
+        where username = #{username}
+          and phone = #{phone}
+    </select>
+    <select id="getUserSum" resultType="java.lang.Integer">
+        select count(*)
+        from sys_user
+    </select>
+    <select id="getUserByPhone" resultType="com.example.entity.SysUser">
+        select *
+        from sys_user
+        where phone = #{phone}
+    </select>
+</mapper>

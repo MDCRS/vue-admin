@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysPayRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.SysPayRecord">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="rentId" column="rent_id" jdbcType="BIGINT"/>
+        <result property="hostId" column="host_id" jdbcType="BIGINT"/>
+        <result property="bikeId" column="bike_id" jdbcType="BIGINT"/>
+        <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+        <result property="payAmount" column="pay_amount" jdbcType="DECIMAL"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="purpose" column="purpose" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,user_id,bike_id,
+        payment,pay_time,pay_amount,
+        created,updated,is_deleted
+    </sql>
+    <select id="selectListByBikeIdAndHostId" resultType="com.example.entity.SysPayRecord">
+        select *
+        from sys_pay_record
+        where bike_id = #{bikeId}
+          and host_id = #{hostId}
+    </select>
+</mapper>

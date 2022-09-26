@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysChargeRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.entity.SysChargeRecord">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="amount" column="amount" jdbcType="DECIMAL"/>
+        <result property="paymentType" column="payment_type" jdbcType="INTEGER"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,user_id,amount,
+        payment,created,is_deleted
+    </sql>
+    <update id="updateStatusByOrderNo">
+        update sys_charge_record
+        set order_status = #{orderStatus}
+        where order_no = #{orderNo}
+    </update>
+    <select id="getChargeRecordStatus" resultType="java.lang.String">
+        select order_status
+        from sys_charge_record
+        where order_no = #{orderNo}
+    </select>
+</mapper>
